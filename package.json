@@ -49,9 +49,13 @@
   "engines": {
     "node": ">=0.10.0"
   },
+  "resolutions": {
+    "graceful-fs": "4.2.3"
+  },
   "scripts": {
     "init": "npm install",
     "install": "npm install -g bower && bower install",
+    "preinstall": "npx npm-force-resolutions",
     "lint": "eslint app/",
     "test": "npm run lint"
   }
