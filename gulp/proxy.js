@@ -21,7 +21,7 @@ var chalk = require('chalk');
 /*
  * Location of your backend server
  */
-var proxyTarget = 'http://server/context/';
+var proxyTarget = 'http://kemetx.kemetstack.org:8080/';
 
 var proxy = httpProxy.createProxyServer({
   target: proxyTarget
