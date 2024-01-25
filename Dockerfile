@@ -12,7 +12,7 @@ RUN npm install  gulp-cli
 COPY . /usr/src/app
 RUN bower --allow-root install
 RUN npm install -f
-RUN npm install --save-dev gulp
+RUN npm install --save-dev gulp@v3.9.1
 RUN npm install --save-dev gulp-inject
 RUN  npm install --save-dev gulp-ruby-sass
 COPY gulpfile.js /usr/src/app/gulpfile.js
