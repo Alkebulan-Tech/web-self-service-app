@@ -62,4 +62,4 @@ function proxyMiddleware(req, res, next) {
  */
 
 //module.exports = [proxyMiddleware];
-module.exports = [proxyMiddleware];
+module.exports = [];
