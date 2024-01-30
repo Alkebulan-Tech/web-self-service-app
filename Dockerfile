@@ -1,6 +1,6 @@
 FROM ubuntu/nginx as builder
 
-RUN apt get update
+RUN apt get install update
 RUN apt install git
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
