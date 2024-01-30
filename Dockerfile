@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:8.9.4 as builder
+FROM ubuntu/nginx as builder
 
 RUN apk update
 RUN apk add git
