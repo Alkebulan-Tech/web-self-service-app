@@ -1,24 +1,37 @@
-FROM ubuntu/nginx as builder
+# Stage 1: Build the application
+FROM ubuntu as builder
 
-RUN sudo apt-get install update
-RUN sudo apt-install git
-RUN mkdir -p /usr/src/app
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y git nodejs npm
+
+# Set working directory
 WORKDIR /usr/src/app
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
-COPY package.json /usr/src/app/package.json
-COPY gulpfile.js /usr/src/app/gulpfile.js
-RUN npm install  bower
-RUN npm install  gulp-cli
-COPY . /usr/src/app
-RUN bower --allow-root install
-RUN npm install -f
-RUN npm install --save-dev gulp@v3.9.1
-RUN npm install --save-dev gulp-inject
-RUN  npm install --save-dev gulp-ruby-sass
-COPY gulpfile.js /usr/src/app/gulpfile.js
-RUN gulp build  
 
+# Copy package.json and gulpfile.js
+COPY package.json gulpfile.js /usr/src/app/
+
+# Install npm packages
+RUN npm install -g bower gulp-cli \
+    && npm install
+
+# Copy the rest of the application
+COPY . /usr/src/app
+
+# Install bower dependencies
+RUN bower --allow-root install
+
+# Build the application
+RUN gulp build
+
+# Stage 2: Create the final image with Nginx
 FROM nginx:1.19.3
+
+# Copy the built application from the builder stage
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
+
+# Expose port 80
 EXPOSE 80
+
+# Run Nginx
 CMD ["nginx", "-g", "daemon off;"]
