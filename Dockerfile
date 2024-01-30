@@ -18,7 +18,7 @@ WORKDIR /usr/src/app
 COPY package.json gulpfile.js /usr/src/app/
 
 # Install npm packages
-RUN npm install -g bower gulp-cli && npm install && bower install
+RUN npm install bower --location=global gulp-cli && npm install && bower install
 
 # Remove PhantomJS references (if any)
 
