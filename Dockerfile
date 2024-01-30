@@ -28,6 +28,14 @@ COPY . /usr/src/app
 # Install bower dependencies
 RUN /bin/bash -c "source /root/.nvm/nvm.sh && bower --allow-root install"
 
+RUN /bin/bash -c "source /root/.nvm/nvm.sh && npm install --save-dev gulp@v3.9.1"
+
+RUN /bin/bash -c "source /root/.nvm/nvm.sh && npm install --save-dev gulp-inject"
+
+RUN /bin/bash -c "source /root/.nvm/nvm.sh && npm install --save-dev gulp-ruby-sass"
+
+COPY gulpfile.js /usr/src/app/gulpfile.js
+
 # Build the application
 RUN /bin/bash -c "source /root/.nvm/nvm.sh && gulp build"
 
