@@ -1,7 +1,7 @@
 FROM ubuntu/nginx as builder
 
-RUN sudo apt get install update
-RUN sudo apt install git
+RUN sudo apt-get install update
+RUN sudo apt-install git
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
