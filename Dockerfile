@@ -3,7 +3,13 @@ FROM ubuntu as builder
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y git nodejs npm
+    apt-get install -y git curl
+
+# Install nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+
+# Use nvm to install Node.js 8.9.4
+RUN /bin/bash -c "source /root/.nvm/nvm.sh && nvm install 8.9.4 && nvm use 8.9.4"
 
 # Set working directory
 WORKDIR /usr/src/app
@@ -12,7 +18,7 @@ WORKDIR /usr/src/app
 COPY package.json gulpfile.js /usr/src/app/
 
 # Install npm packages
-RUN npm install -g bower gulp-cli && npm install
+RUN npm install -g bower gulp-cli && npm install && bower install
 
 # Remove PhantomJS references (if any)
 
