@@ -8,8 +8,8 @@ RUN apt-get update && \
 # Install nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
-# Use nvm to install Node.js 8.9.4
-RUN /bin/bash -c "source /root/.nvm/nvm.sh && nvm install 8.9.4 && nvm use 8.9.4"
+# Use nvm to install Node.js 8.9.4 and npm
+RUN /bin/bash -c "source /root/.nvm/nvm.sh && nvm install 8.9.4 && nvm use 8.9.4 && npm install -g npm"
 
 # Set working directory
 WORKDIR /usr/src/app
@@ -18,7 +18,7 @@ WORKDIR /usr/src/app
 COPY package.json gulpfile.js /usr/src/app/
 
 # Install npm packages
-RUN npm install bower --location=global gulp-cli && npm install && bower install
+RUN /bin/bash -c "source /root/.nvm/nvm.sh && npm install -g bower gulp-cli && npm install"
 
 # Remove PhantomJS references (if any)
 
@@ -26,10 +26,10 @@ RUN npm install bower --location=global gulp-cli && npm install && bower install
 COPY . /usr/src/app
 
 # Install bower dependencies
-RUN bower --allow-root install
+RUN /bin/bash -c "source /root/.nvm/nvm.sh && bower --allow-root install"
 
 # Build the application
-RUN gulp build
+RUN /bin/bash -c "source /root/.nvm/nvm.sh && gulp build"
 
 # Stage 2: Create the final image with Nginx
 FROM nginx:1.19.3
