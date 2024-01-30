@@ -9,7 +9,7 @@ RUN apt-get update && \
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
 # Use nvm to install Node.js 8.9.4 and npm
-RUN /bin/bash -c "source /root/.nvm/nvm.sh && nvm install 8.9.4 && nvm use 8.9.4 && npm install -g npm"
+RUN /bin/bash -c "source /root/.nvm/nvm.sh && nvm install 8.9.4 && nvm use 8.9.4 && npm install -g npm@6.14.11"
 
 # Set working directory
 WORKDIR /usr/src/app
