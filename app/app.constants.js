@@ -3,7 +3,7 @@
 
   angular.module('selfService')
 
-	  .constant("BASE_URL", "http://kemetx.kemetstack.org/fineract-provider/api/v1")
+	  .constant("BASE_URL", "https://kemetx.kemetstack.org/fineract-provider/api/v1")
 
 	.constant('AUTH_EVENTS', {
 		updateUser: 'update-user',

@@ -20,8 +20,6 @@ COPY package.json gulpfile.js /usr/src/app/
 # Install npm packages
 RUN /bin/bash -c "source /root/.nvm/nvm.sh && npm install -g bower gulp-cli && npm install"
 
-# Remove PhantomJS references (if any)
-
 # Copy the rest of the application
 COPY . /usr/src/app
 

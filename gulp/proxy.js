@@ -21,7 +21,7 @@ var chalk = require('chalk');
 /*
  * Location of your backend server
  */
-var proxyTarget = 'http://kemetx.kemetstack.org';
+var proxyTarget = 'https://kemetx.kemetstack.org';
 
 var proxy = httpProxy.createProxyServer({
   target: proxyTarget
@@ -62,4 +62,4 @@ function proxyMiddleware(req, res, next) {
  */
 
 //module.exports = [proxyMiddleware];
-module.exports = [];
+//module.exports = [];
